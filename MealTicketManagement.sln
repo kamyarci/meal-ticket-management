@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealTicketManagement.Applic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealTicketManagement.Infrastructure", "MealTicketManagement.Infrastructure\MealTicketManagement.Infrastructure.csproj", "{054556EC-8E17-4D4A-8629-0353C42BC6D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealTicketManagement.Tests", "MealTicketManagement.Tests\MealTicketManagement.Tests.csproj", "{C8773BB3-8863-4CFB-87F3-71945CD17DDF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealTicketManagement.Tests", "MealTicketManagement.Tests\MealTicketManagement.Tests.csproj", "{B22BBAF5-ED6F-4816-B32F-9A7BD39D8245}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,9 +32,9 @@ Global
 		{054556EC-8E17-4D4A-8629-0353C42BC6D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{054556EC-8E17-4D4A-8629-0353C42BC6D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{054556EC-8E17-4D4A-8629-0353C42BC6D9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C8773BB3-8863-4CFB-87F3-71945CD17DDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C8773BB3-8863-4CFB-87F3-71945CD17DDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C8773BB3-8863-4CFB-87F3-71945CD17DDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C8773BB3-8863-4CFB-87F3-71945CD17DDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B22BBAF5-ED6F-4816-B32F-9A7BD39D8245}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B22BBAF5-ED6F-4816-B32F-9A7BD39D8245}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B22BBAF5-ED6F-4816-B32F-9A7BD39D8245}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B22BBAF5-ED6F-4816-B32F-9A7BD39D8245}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
