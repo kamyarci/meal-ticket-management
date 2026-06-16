@@ -1,13 +1,12 @@
 ﻿using MealTicketManagement.Domain.Enums;
+using MealTicketManagement.Domain.Guards;
 
 namespace MealTicketManagement.Domain.Entities;
 
-public class MealTicket
+public class MealTicket : BaseEntity
 {
-    public Guid Id { get; private set; }
     public Employee Employee { get; private set; } = null!;
     public int Quantity { get; private set; }
-    public Status Status { get; private set; }
     public DateTime DeliveredAt { get; private set; }
 
     public MealTicket()
@@ -16,16 +15,17 @@ public class MealTicket
 
     public MealTicket(Employee employee, int quantity)
     {
-        Id = Guid.NewGuid();
+        Guard.IsNotNull(employee, "Funcionário é obrigatório.");
         Employee = employee;
         Quantity = quantity;
-        Status = Status.Active;
         DeliveredAt = DateTime.UtcNow;
     }
 
     public void Update(int quantity, Status status)
     {
+        Guard.IsGreaterThan(quantity, 0, "A quantidade deve ser maior que zero.");
         Quantity = quantity;
         Status = status;
+        SetUpdatedAt();
     }
 }
