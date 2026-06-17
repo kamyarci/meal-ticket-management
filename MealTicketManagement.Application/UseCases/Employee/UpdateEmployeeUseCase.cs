@@ -1,6 +1,6 @@
 ﻿using MealTicketManagement.Application.DTOs.Employee.Request;
 using MealTicketManagement.Application.DTOs.Employee.Response;
-using MealTicketManagement.Application.Interfaces;
+using MealTicketManagement.Application.Interfaces.Employee;
 using MealTicketManagement.Domain.Exceptions;
 using MealTicketManagement.Domain.Interfaces;
 
