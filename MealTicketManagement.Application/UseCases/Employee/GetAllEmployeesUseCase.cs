@@ -1,4 +1,4 @@
-﻿using MealTicketManagement.Application.DTOs.Employee;
+﻿using MealTicketManagement.Application.DTOs.Employee.Response;
 using MealTicketManagement.Application.Interfaces;
 using MealTicketManagement.Domain.Interfaces;
 
