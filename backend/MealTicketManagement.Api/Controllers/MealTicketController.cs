@@ -1,4 +1,4 @@
-﻿using MealTicketManagement.Application.DTOs.MealTicket.Request;
+using MealTicketManagement.Application.DTOs.MealTicket.Request;
 using MealTicketManagement.Application.DTOs.MealTicket.Response;
 using MealTicketManagement.Application.DTOs.Report;
 using MealTicketManagement.Application.Interfaces.MealTicket;
@@ -15,16 +15,25 @@ public class MealTicketController : ControllerBase
     private readonly IUpdateMealTicketUseCase _updateMealTicketUseCase;
     private readonly IGetMealTicketByIdUseCase _getMealTicketByIdUseCase;
     private readonly IGetTicketReportUseCase _getTicketReportUseCase;
+    private readonly IGetAllMealTicketsUseCase _getAllMealTicketsUseCase;
 
     public MealTicketController(ILogger<MealTicketController> logger, ICreateMealTicketUseCase createMealTicketUseCase,
         IUpdateMealTicketUseCase updateMealTicketUseCase, IGetMealTicketByIdUseCase getMealTicketByIdUseCase,
-        IGetTicketReportUseCase getTicketReportUseCase)
+        IGetTicketReportUseCase getTicketReportUseCase, IGetAllMealTicketsUseCase getAllMealTicketsUseCase)
     {
         _logger = logger;
         _createMealTicketUseCase = createMealTicketUseCase;
         _updateMealTicketUseCase = updateMealTicketUseCase;
         _getMealTicketByIdUseCase = getMealTicketByIdUseCase;
         _getTicketReportUseCase = getTicketReportUseCase;
+        _getAllMealTicketsUseCase = getAllMealTicketsUseCase;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAllMealTickets()
+    {
+        IEnumerable<MealTicketResponse> result = await _getAllMealTicketsUseCase.Execute();
+        return Ok(result);
     }
 
     [HttpPost]

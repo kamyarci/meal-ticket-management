@@ -19,6 +19,7 @@ public static class DependencyInjection
         services.AddScoped<IUpdateMealTicketUseCase, UpdateMealTicketUseCase>();
         services.AddScoped<IGetMealTicketByIdUseCase, GetMealTicketByIdUseCase>();
         services.AddScoped<IGetTicketReportUseCase, GetTicketReportUseCase>();
+        services.AddScoped<IGetAllMealTicketsUseCase, GetAllMealTicketsUseCase>();
 
         return services;
     }
