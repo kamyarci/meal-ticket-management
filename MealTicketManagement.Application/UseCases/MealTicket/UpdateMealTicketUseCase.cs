@@ -3,6 +3,7 @@ using MealTicketManagement.Application.DTOs.MealTicket.Response;
 using MealTicketManagement.Application.Interfaces.MealTicket;
 using MealTicketManagement.Domain.Exceptions;
 using MealTicketManagement.Domain.Interfaces;
+using MealTicketEntity = MealTicketManagement.Domain.Entities.MealTicket;
 
 namespace MealTicketManagement.Application.UseCases.MealTicket;
 
@@ -17,7 +18,7 @@ public class UpdateMealTicketUseCase: IUpdateMealTicketUseCase
 
     public async Task<MealTicketResponse> Execute(Guid id, UpdateMealTicketRequest request)
     {
-        var ticketMeal = await _mealTicketRepository.GetByIdAsync(id);
+        MealTicketEntity? ticketMeal = await _mealTicketRepository.GetByIdAsync(id);
         if (ticketMeal is null)
             throw new BusinessException("Ticket não encontrado.");
 
