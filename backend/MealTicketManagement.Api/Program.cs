@@ -42,6 +42,12 @@ public class Program
                     return new BadRequestObjectResult(new { message = string.Join("; ", errors) });
                 });
 
+        builder.Services.AddCors(options =>
+            options.AddDefaultPolicy(policy =>
+                policy.WithOrigins(builder.Configuration["Cors:AllowedOrigin"]!)
+                      .AllowAnyHeader()
+                      .AllowAnyMethod()));
+
         builder.Services.AddAuthorization();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
@@ -55,6 +61,7 @@ public class Program
         }
 
         app.UseSerilogRequestLogging();
+        app.UseCors();
         app.UseMiddleware<ExceptionMiddleware>();
         app.UseHttpsRedirection();
         app.UseAuthorization();
