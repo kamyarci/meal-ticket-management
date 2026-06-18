@@ -5,6 +5,7 @@ using MealTicketManagement.Domain.Enums;
 using MealTicketManagement.Domain.Exceptions;
 using MealTicketManagement.Domain.Interfaces;
 using MealTicketEntity = MealTicketManagement.Domain.Entities.MealTicket;
+using EmployeeEntity = MealTicketManagement.Domain.Entities.Employee;
 
 namespace MealTicketManagement.Application.UseCases.MealTicket;
 
@@ -21,7 +22,7 @@ public class CreateMealTicketUseCase : ICreateMealTicketUseCase
 
     public async Task<MealTicketResponse> Execute(CreateMealTicketRequest request)
     {
-        var employee = await _employeeRepository.GetByIdAsync(request.EmployeeId);
+        EmployeeEntity? employee = await _employeeRepository.GetByIdAsync(request.EmployeeId);
 
         if (employee is null)
             throw new BusinessException("Funcionário não encontrado.");
@@ -29,7 +30,7 @@ public class CreateMealTicketUseCase : ICreateMealTicketUseCase
         if (employee.Status == Status.Inactive)
             throw new BusinessException("Não é possível criar ticket para um funcionário inativo.");
 
-        var ticket = new MealTicketEntity(employee, request.Quantity);
+        MealTicketEntity ticket = new MealTicketEntity(employee, request.Quantity);
         await _mealTicketRepository.AddAsync(ticket);
 
         return new MealTicketResponse(ticket.Id, ticket.Employee.Id, ticket.Employee.Name, ticket.Quantity,

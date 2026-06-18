@@ -2,6 +2,7 @@
 using MealTicketManagement.Application.Interfaces.MealTicket;
 using MealTicketManagement.Domain.Exceptions;
 using MealTicketManagement.Domain.Interfaces;
+using MealTicketEntity = MealTicketManagement.Domain.Entities.MealTicket;
 
 namespace MealTicketManagement.Application.UseCases.MealTicket;
 
@@ -16,7 +17,7 @@ public class GetMealTicketByIdUseCase : IGetMealTicketByIdUseCase
 
     public async Task<MealTicketResponse> Execute(Guid id)
     {
-        var ticketMeal = await _mealTicketRepository.GetByIdAsync(id);
+        MealTicketEntity? ticketMeal = await _mealTicketRepository.GetByIdAsync(id);
         if (ticketMeal is null)
             throw new BusinessException("Ticket não encontrado.");
 

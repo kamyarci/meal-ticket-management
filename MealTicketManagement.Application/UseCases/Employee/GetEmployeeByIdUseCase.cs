@@ -2,6 +2,7 @@
 using MealTicketManagement.Application.Interfaces.Employee;
 using MealTicketManagement.Domain.Exceptions;
 using MealTicketManagement.Domain.Interfaces;
+using EmployeeEntity = MealTicketManagement.Domain.Entities.Employee;
 
 namespace MealTicketManagement.Application.UseCases.Employee;
 
@@ -16,7 +17,7 @@ public class GetEmployeeByIdUseCase : IGetEmployeeByIdUseCase
 
     public async Task<EmployeeResponse> Execute(Guid id)
     {
-        var employee = await _employeeRepository.GetByIdAsync(id);
+        EmployeeEntity? employee = await _employeeRepository.GetByIdAsync(id);
         if (employee is null)
             throw new BusinessException("Funcionário não encontrado.");
 

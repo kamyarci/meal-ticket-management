@@ -21,7 +21,7 @@ public class CreateEmployeeUseCase : ICreateEmployeeUseCase
         if (await _employeeRepository.ExistsCpfAsync(request.Cpf))
             throw new BusinessException("CPF já cadastrado.");
 
-        var employee = new EmployeeEntity(request.Name, request.Cpf);
+        EmployeeEntity employee = new EmployeeEntity(request.Name, request.Cpf);
         await _employeeRepository.AddAsync(employee);
 
         return new EmployeeResponse(employee.Id, employee.Name, employee.Cpf, employee.Status, employee.UpdatedAt);
