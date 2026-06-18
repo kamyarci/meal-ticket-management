@@ -8,6 +8,9 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["MealTicketManagement.Api/MealTicketManagement.Api.csproj", "MealTicketManagement.Api/"]
+COPY ["MealTicketManagement.Domain/MealTicketManagement.Domain.csproj", "MealTicketManagement.Domain/"]
+COPY ["MealTicketManagement.Application/MealTicketManagement.Application.csproj", "MealTicketManagement.Application/"]
+COPY ["MealTicketManagement.Infrastructure/MealTicketManagement.Infrastructure.csproj", "MealTicketManagement.Infrastructure/"]
 RUN dotnet restore "MealTicketManagement.Api/MealTicketManagement.Api.csproj"
 COPY . .
 WORKDIR "/src/MealTicketManagement.Api"
