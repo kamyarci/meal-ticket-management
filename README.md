@@ -50,7 +50,7 @@ Injeçao de dependência por camada: a ideia é que cada camada registra suas pr
 - Funcionário obrigatório e deve estar ativo para criar ticket
 - Quantidade obrigatória e maior que zero
 - Data de Entrega automática e imutável
-- Status do funcionário sempre ativo na criação do ticket, podendo ser alterado via edição
+- Status do ticket sempre ativo na criação, podendo ser alterado via edição
 - Relatório por período com total por funcionário e total geral
 - Nenhum registro pode ser excluído
 - Docker Compose com PostgreSQL e API
