@@ -16,6 +16,7 @@ public class MealTicket : BaseEntity
     public MealTicket(Employee employee, int quantity)
     {
         Guard.IsNotNull(employee, "Funcionário é obrigatório.");
+        Guard.IsGreaterThan(quantity, 0, "Quantidade deve ser maior que zero.");
         Employee = employee;
         Quantity = quantity;
         DeliveredAt = DateTime.UtcNow;
