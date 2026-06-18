@@ -33,6 +33,7 @@ Thumbs.db
 .env
 .env.local
 appsettings.*.local.json
+appsettings.Development.json
 secrets.json
 
 # Publish
