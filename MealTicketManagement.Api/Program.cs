@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Polly;
 using Polly.Retry;
+using Serilog;
 
 namespace MealTicketManagement.Api;
 
@@ -16,6 +17,13 @@ public class Program
     public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+
+        Log.Logger = new LoggerConfiguration()
+            .WriteTo.Console()
+            .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
+            .CreateLogger();
+
+        builder.Host.UseSerilog();
 
         builder.Services.AddInfrastructure(builder.Configuration);
         builder.Services.AddApplication();
@@ -46,6 +54,7 @@ public class Program
             app.UseSwaggerUI();
         }
 
+        app.UseSerilogRequestLogging();
         app.UseMiddleware<ExceptionMiddleware>();
         app.UseHttpsRedirection();
         app.UseAuthorization();
@@ -65,9 +74,9 @@ public class Program
 
             await pipeline.ExecuteAsync(async _ =>
             {
-                Console.WriteLine("Tentando aplicar migrations...");
+                Log.Information("Tentando aplicar migrations...");
                 await db.Database.MigrateAsync();
-                Console.WriteLine("Migrations aplicadas com sucesso.");
+                Log.Information("Migrations aplicadas com sucesso.");
             });
         }
 
