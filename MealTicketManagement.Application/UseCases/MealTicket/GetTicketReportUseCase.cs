@@ -2,6 +2,7 @@
 using MealTicketManagement.Application.Interfaces.MealTicket;
 using MealTicketManagement.Domain.Exceptions;
 using MealTicketManagement.Domain.Interfaces;
+using MealTicketEntity = MealTicketManagement.Domain.Entities.MealTicket;
 
 namespace MealTicketManagement.Application.UseCases.MealTicket;
 
@@ -16,12 +17,15 @@ public class GetTicketReportUseCase : IGetTicketReportUseCase
 
     public async Task<TicketReportResponse> Execute(DateTime startDate, DateTime endDate)
     {
+        startDate = DateTime.SpecifyKind(startDate, DateTimeKind.Utc);
+        endDate = DateTime.SpecifyKind(endDate, DateTimeKind.Utc);
+
         if (startDate > endDate)
             throw new BusinessException("A data inicial não pode ser maior que a data final.");
 
-        var tickets = await _mealTicketRepository.GetByPeriodAsync(startDate, endDate);
+        IEnumerable<MealTicketEntity> tickets = await _mealTicketRepository.GetByPeriodAsync(startDate, endDate);
 
-        var employeeSummaries = tickets
+        List<EmployeeTicketSummary> employeeSummaries = tickets
             .GroupBy(t => t.Employee)
             .Select(g => new EmployeeTicketSummary(g.Key.Id, g.Key.Name, g.Sum(t => t.Quantity)))
             .ToList();
