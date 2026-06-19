@@ -1,6 +1,6 @@
 ﻿## Meal Ticket Management
 
-### Objetivo
+### Descrição
 
 API REST que gerencia a entrega de tickets de refeição para funcionários, permitindo visualizar o total de tickets entregues por pessoa e no geral em um determinado período.
 
