@@ -6,6 +6,7 @@ API REST que gerencia a entrega de tickets de refeição para funcionários, per
 
 ### Stack
 
+Backend:
 - .NET 8
 - ASP.NET Core Web API
 - Entity Framework Core
@@ -14,6 +15,12 @@ API REST que gerencia a entrega de tickets de refeição para funcionários, per
 - Swagger
 - xUnit
 - Moq
+
+Frontend:
+- Next.js 15 + React 19 + TypeScript
+- shadcn/ui + Tailwind CSS 4
+- Axios
+- Lucide React
 
 ### Arquitetura
 
@@ -39,25 +46,19 @@ Injeçao de dependência por camada: a ideia é que cada camada registra suas pr
 
 ### Funcionalidades
 
-- Cadastro de funcionários
-- Edição de funcionários
+- Cadastro e edição de funcionários
+- Cadastro e edição de tickets de refeição
+- Relatório por período com total por funcionário e geral
+
+### Regras de Negócio
+
 - CPF único com validação matemática
-- Status sempre ativo na criação de funcionário
+- Status sempre ativo na criação de funcionário e ticket
 - Funcionário pode ser inativado, mas não excluído
-- Data de alteração atualizada a cada edição
-- Cadastro de tickets entregues
-- Edição de tickets
-- Funcionário obrigatório e deve estar ativo para criar ticket
+- Funcionário deve estar ativo para criar ticket
 - Quantidade obrigatória e maior que zero
-- Data de Entrega automática e imutável
-- Status do ticket sempre ativo na criação, podendo ser alterado via edição
-- Relatório por período com total por funcionário e total geral
+- Data de entrega automática e imutável
 - Nenhum registro pode ser excluído
-- Docker Compose com PostgreSQL e API
-- Migrations automáticas ao iniciar a aplicação
-- Swagger para documentação
-- Testes unitários com xUnit e Moq
-- script.sql para criação manual das tabelas
 
 ### Endpoints
 
@@ -70,6 +71,7 @@ Injeçao de dependência por camada: a ideia é que cada camada registra suas pr
 **MealTickets:**
 - `POST /api/mealtickets`
 - `PUT /api/mealtickets/{id}`
+- `GET /api/mealtickets`
 - `GET /api/mealtickets/{id}`
 - `GET /api/mealtickets/report?startDate={startDate}&endDate={endDate}`
 
@@ -93,9 +95,20 @@ meal_tickets
 
 ### Como rodar
 
+#### Com Docker
 1. Clone o repositório
 2. Navegue até a pasta do projeto
-3. Execute `docker-compose up` para iniciar a aplicação e o banco de dados
-4. Acesse `http://localhost:8080/swagger` para visualizar a documentação
-5. Para rodar os testes, execute `dotnet test` na raiz do projeto
-6. Para encerrar, execute `docker-compose down`
+3. Execute `docker-compose up --build`
+4. Frontend estará disponível em `http://localhost:3000`
+5. API estará disponível em `http://localhost:8080`
+6. Acesse `http://localhost:8080/swagger` para visualizar a documentação
+7. Para encerrar, execute `docker-compose down`
+
+#### Localmente
+1. Copie `backend/MealTicketManagement.Api/appsettings.Development.example.json` para `appsettings.Development.json` e preencha os dados do PostgreSQL
+2. Rode o backend: `cd backend/MealTicketManagement.Api && dotnet run`
+3. Rode o frontend: `cd frontend && yarn install && yarn dev`
+4. Frontend disponível em `http://localhost:3000`
+
+#### Testes
+1. Execute `dotnet test` na pasta `backend`
